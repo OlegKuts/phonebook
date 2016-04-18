@@ -1,0 +1,1 @@
+insert into notes (name, last_name) values('Taras', 'Fesenko'),('Oleg','Kuts'),('Sasha','Trofymov');
