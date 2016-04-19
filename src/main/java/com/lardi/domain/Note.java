@@ -1,7 +1,10 @@
 package com.lardi.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,11 +16,26 @@ public class Note extends BaseEntity {
 	private String lastName;
 	@Column(name = "middle_name")
 	private String middleName;
+	@Column(name = "cell_number")
+	private String cellNumber;
 	@Column(name = "phone_number")
 	private String phoneNumber;
-	private String address;
+	@OneToOne(mappedBy = "note", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Address address;
+	private String email;
 
 	public Note() {
+	}
+
+	public Note(String name, String lastName, String middleName, String cellNumber, String phoneNumber, Address address,
+			String email) {
+		this.name = name;
+		this.lastName = lastName;
+		this.middleName = middleName;
+		this.cellNumber = cellNumber;
+		this.phoneNumber = phoneNumber;
+		this.address = address;
+		this.email = email;
 	}
 
 	public String getName() {
@@ -52,12 +70,28 @@ public class Note extends BaseEntity {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public String getAddress() {
+	public Address getAddress() {
 		return address;
 	}
 
-	public void setAddress(String address) {
+	public void setAddress(Address address) {
 		this.address = address;
+	}
+
+	public String getCellNumber() {
+		return cellNumber;
+	}
+
+	public void setCellNumber(String cellNumber) {
+		this.cellNumber = cellNumber;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lardi.domain.Note;
+import com.lardi.from.NoteForm;
 import com.lardi.repository.NoteRepository;
 
 @Service
@@ -15,5 +16,10 @@ public class NoteService {
 
 	public List<Note> findAll() {
 		return noteRepository.findAll();
+	}
+
+	public void addNewNote(NoteForm noteForm) {
+		Note note = new Note(noteForm.getNote().getName(), null, null, null, null, null, null);
+		noteRepository.save(note);
 	}
 }

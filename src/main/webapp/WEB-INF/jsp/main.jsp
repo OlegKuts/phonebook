@@ -12,6 +12,5 @@
 	<c:forEach items="${notes}" var = "note">
 		<c:out value="${note.name}"/><c:out value="${note.id}"/>
 	</c:forEach>
-
 </body>
 </html>
