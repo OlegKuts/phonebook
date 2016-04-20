@@ -13,13 +13,23 @@ public class Address extends BaseEntity {
 	private String street;
 
 	@OneToOne
-	@JoinColumn(name="note_id")
+	@JoinColumn(name = "note_id")
 	private Note note;
-	
+
+	public Note getNote() {
+		return note;
+	}
+
+	public void setNote(Note note) {
+		this.note = note;
+	}
+
 	public Address() {
 	}
-	
-	
+
+	public Address(String state) {
+		this.state = state;
+	}
 
 	public String getState() {
 		return state;

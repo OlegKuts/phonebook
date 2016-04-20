@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.lardi.service.NoteService;
 
 @Controller
+@RequestMapping("/notes")
 public class IndexController {
 	@Autowired
 	private NoteService noteService;
-
-	@RequestMapping("/")
+	@RequestMapping("")
 	public String index(Model model) {
 		model.addAttribute("notes",noteService.findAll());
 		return "main";

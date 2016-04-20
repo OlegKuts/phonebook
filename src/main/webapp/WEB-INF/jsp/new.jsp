@@ -23,12 +23,20 @@
 </head>
 <body>
 	<div class="container">
-		<form:form modelAttribute="newNote" cssClass="form-horizontal">
+		<form:form modelAttribute="noteForm" cssClass="form-horizontal"
+			action="/notes/create">
 			<div class="form-group">
 				<label for="note.name" class="col-sm-2 control-label">Name:</label>
 				<div class="col-sm-4">
 					<form:input path="note.name" cssClass="form-control" />
 					<form:errors path="note.name" cssClass="text-danger" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="note.name" class="col-sm-2 control-label">State:</label>
+				<div class="col-sm-4">
+					<form:input path="address.state" cssClass="form-control" />
+					<form:errors path="address.state" cssClass="text-danger" />
 				</div>
 			</div>
 			<div class="form-group">

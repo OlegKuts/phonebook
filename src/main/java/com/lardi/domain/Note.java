@@ -20,11 +20,17 @@ public class Note extends BaseEntity {
 	private String cellNumber;
 	@Column(name = "phone_number")
 	private String phoneNumber;
-	@OneToOne(mappedBy = "note", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToOne(mappedBy = "note", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Address address;
 	private String email;
 
 	public Note() {
+		
+	}
+
+	public Note(String name) {
+		super();
+		this.name = name;
 	}
 
 	public Note(String name, String lastName, String middleName, String cellNumber, String phoneNumber, Address address,

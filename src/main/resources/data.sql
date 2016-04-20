@@ -1,1 +1,2 @@
-insert into notes (name, last_name) values('Taras', 'Fesenko'),('Oleg','Kuts'),('Sasha','Trofymov');
+insert into notes (name, last_name) values('Taras', 'Fesenko'),('Oleg','Kuts'),('Sasha','Trofymov'),('Annia','Besarab');
+insert into address (state, note_id) values('Kyiv', 1),('Kyiv', 2),('Kyiv', 3),('Kyiv', 4);
