@@ -5,15 +5,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "address")
 public class Address extends BaseEntity {
-	private String state;
 	private String city;
 	private String street;
 
 	@OneToOne
 	@JoinColumn(name = "note_id")
+	@JsonBackReference
 	private Note note;
 
 	public Note getNote() {
@@ -27,17 +29,6 @@ public class Address extends BaseEntity {
 	public Address() {
 	}
 
-	public Address(String state) {
-		this.state = state;
-	}
-
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
-	}
 
 	public String getCity() {
 		return city;

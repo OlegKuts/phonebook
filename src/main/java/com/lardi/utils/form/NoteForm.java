@@ -1,4 +1,4 @@
-package com.lardi.from;
+package com.lardi.utils.form;
 
 import com.lardi.domain.Address;
 import com.lardi.domain.Note;

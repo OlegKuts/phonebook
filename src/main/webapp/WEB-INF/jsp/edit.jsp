@@ -35,8 +35,8 @@
 			<div class="form-group">
 				<label for="note.name" class="col-sm-2 control-label">State:</label>
 				<div class="col-sm-4">
-					<form:input path="address.state" cssClass="form-control" />
-					<form:errors path="address.state" cssClass="text-danger" />
+					<form:input path="address.city" cssClass="form-control" />
+					<form:errors path="address.city" cssClass="text-danger" />
 				</div>
 			</div>
 					<form:hidden path="note.id" />

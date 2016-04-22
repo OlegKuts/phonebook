@@ -1,38 +1,46 @@
 package com.lardi.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.lardi.domain.Address;
 import com.lardi.domain.Note;
-import com.lardi.from.NoteForm;
+import com.lardi.domain.User;
 import com.lardi.repository.NoteRepository;
+import com.lardi.repository.UserRepository;
+import com.lardi.service.exceptions.NoNoteFoundException;
+import com.lardi.utils.form.NoteForm;
 
 @Service
 public class NoteServiceImpl implements NoteService {
 	@Autowired
 	private NoteRepository noteRepository;
 
-	@Override
-	public List<Note> findAll() {
-		return noteRepository.findAll();
-	}
+	@Autowired
+	private UserRepository userRepository;
+
 
 	@Override
-	public void addNote(NoteForm noteForm) {
+	public void addNote(NoteForm noteForm, String login) {
+		User user = userRepository.findByLogin(login);
 		Note note = new Note();
 		note.setName(noteForm.getNote().getName());
-		Address address = new Address(noteForm.getAddress().getState());
+		Address address = new Address();
+		address.setCity(noteForm.getAddress().getCity());
 		address.setNote(note);
 		note.setAddress(address);
-		noteRepository.save(note);
+		user.getNotes().add(note);
+		note.setUser(user);
+		userRepository.save(user);
 	}
 
 	@Override
-	public Note findById(Long id) {
-		return noteRepository.findOne(id);
+	public Note findById(Long id, String login) {
+		Note note = noteRepository.findOne(id);
+		User user = userRepository.findByLogin(login);
+		if(!user.getNotes().contains(note)){
+			throw new NoNoteFoundException("No note was found");
+		}
+		return note;
 	}
 
 	@Override
@@ -40,14 +48,17 @@ public class NoteServiceImpl implements NoteService {
 		Note note = noteRepository.findOne(noteForm.getNote().getId());
 		Address address = note.getAddress();
 		note.setName(noteForm.getNote().getName());
-		address.setState(noteForm.getAddress().getState());
+		address.setCity(noteForm.getAddress().getCity());
 		address.setNote(note);
 		noteRepository.save(note);
 	}
 
 	@Override
-	public void deleteNote(Long id) {
-		noteRepository.delete(id);
+	public void deleteNote(Long id, String login) {
+		User user = userRepository.findByLogin(login);
+		Note note = noteRepository.findOne(id);
+		user.getNotes().remove(note);
+		userRepository.save(user);
 	}
 
 }

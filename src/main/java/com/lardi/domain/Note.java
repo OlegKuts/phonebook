@@ -4,8 +4,13 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "notes")
@@ -21,11 +26,16 @@ public class Note extends BaseEntity {
 	@Column(name = "phone_number")
 	private String phoneNumber;
 	@OneToOne(mappedBy = "note", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JsonManagedReference
 	private Address address;
 	private String email;
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	@JsonBackReference
+	private User user;
 
 	public Note() {
-		
+
 	}
 
 	public Note(String name) {
@@ -98,6 +108,14 @@ public class Note extends BaseEntity {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

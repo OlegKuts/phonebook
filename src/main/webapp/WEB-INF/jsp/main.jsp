@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -15,39 +15,71 @@
 <link
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
 	rel="stylesheet">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<script src="js/notes.js"></script>
 </head>
 <body>
 	<div class="container">
-		<table class="table">
+		<table class="table table-bordered table-hover">
 			<thead>
-				<th>Id</th>
-				<th>Name</th>
-				<th>State</th>
-				<th>Edit</th>
-				<th>Delete</th>
+				<tr>
+					<th>Name</th>
+					<th>Last Name</th>
+					<th>Middle Name</th>
+					<th>Cell number</th>
+					<th>Home phone</th>
+					<th>Email</th>
+					<th>City</th>
+					<th>Street</th>
+					<th>Edit</th>
+					<th>Delete</th>
+				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${notes}" var="note">
+				<tr>
+					<td style="width: 10%"><input id="nameFilter" type="text"
+						placeholder="Name" style="width: 90%"></td>
+					<td style="width: 10%"><input id="lastNameFilter" type="text"
+						placeholder="Last Name" style="width: 90%"></td>
+					<td></td>
+					<td style="width: 17%"><input id="cellNumberFilter" type="text"
+						placeholder="Cell number" style="width: 90%"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<a class="btn btn-primary btn-lg" style="float: right"
+			href="<c:url value='/notes/new' />">Add new</a>
+	</div>
+
+</body>
+</html>
+
+<!--<c:forEach items="${notes}" var="note">
 					<tr>
-						<td><c:out value="${note.id}" /></td>
 						<td><c:out value="${note.name}" /></td>
-						<td><c:out value="${note.address.state}" /></td>
-						<td><a class="btn btn-warning btn-sm"
+						<td><c:out value="${note.lastName}" /></td>
+						<td><c:out value="${note.middleName}" /></td>
+						<td><c:out value="${note.cellNumber}" /></td>
+						<td><c:out value="${note.phoneNumber}" /></td>
+						<td><c:out value="${note.email}" /></td>
+						<td><c:out value="${note.address.city}" /></td>
+						<td><c:out value="${note.address.street}" /></td>
+						<td><a class="btn btn-warning btn-xs"
 							href="<c:url value='/notes/edit/${note.id}' />">Edit</a></td>
 						<td><form:form action='/notes/delete/${note.id}'>
 								<input type="submit" value="Delete"
-									class="btn btn-danger btn-sm" />
+									class="btn btn-danger btn-xs" />
 							</form:form></td>
-				</c:forEach>
-			</tbody>
-		</table>
-		<a class="btn btn-primary btn-lg" style="float:right" href="<c:url value='/notes/new' />">Add
-				new</a>
-	</div>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-</body>
-</html>
+					</tr>
+				</c:forEach>-->

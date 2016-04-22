@@ -1,20 +1,16 @@
 package com.lardi.service;
 
-import java.util.List;
-
 import com.lardi.domain.Note;
-import com.lardi.from.NoteForm;
+import com.lardi.utils.form.NoteForm;
 
 public interface NoteService {
 
-	List<Note> findAll();
-
-	Note findById(Long id);
+	Note findById(Long id, String login);
 
 	void updateNote(NoteForm noteForm);
 
-	void addNote(NoteForm noteForm);
+	void addNote(NoteForm noteForm, String login);
 
-	void deleteNote(Long id);
+	void deleteNote(Long id, String login);
 
 }
