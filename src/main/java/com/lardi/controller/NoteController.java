@@ -2,8 +2,11 @@ package com.lardi.controller;
 
 import java.security.Principal;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +32,11 @@ public class NoteController {
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String createNote(@ModelAttribute("noteForm") NoteForm noteForm, Principal principal) {
+	public String createNote(@ModelAttribute("noteForm") @Valid NoteForm noteForm, BindingResult bindingResult,
+			Principal principal) {
+		if (bindingResult.hasErrors()) {
+			return "new";
+		}
 		noteService.addNote(noteForm, principal.getName());
 		return "redirect:/notes";
 	}
@@ -43,7 +50,10 @@ public class NoteController {
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String updateNote(@ModelAttribute("noteForm") NoteForm noteForm) {
+	public String updateNote(@ModelAttribute("noteForm") @Valid NoteForm noteForm, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			return "edit";
+		}
 		noteService.updateNote(noteForm);
 		return "redirect:/notes";
 	}

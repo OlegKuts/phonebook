@@ -9,18 +9,32 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.lardi.utils.validator.UniqueLogin;
 
 @Entity
 @Table(name = "users")
 public class User extends BaseEntity {
+
+	// @Pattern(regexp="[A-Za-z]{3,}", message="Login must consist of english
+	// characters only and be no less than 3 symbols")
+	@Size(min = 3, message = "Login should be no less than {min} symbols")
+	@Pattern(regexp = "[A-Za-z]*", message = "Login must consist of english characters only")
+	@UniqueLogin(message = "Login must be unique")
 	private String login;
+	@Size(min = 5, message = "Password should be no less than {min} symbols")
 	private String password;
 	private boolean enabled;
+	@Size(min = 5, message = "Name should be no less than {min} symbols")
 	private String name;
 	@Column(name = "last_name")
+	@Size(min = 5, message = "Last name should be no less than {min} symbols")
 	private String lastName;
 	@Column(name = "middle_name")
+	@Size(min = 5, message = "Middle name should be no less than {min} symbols")
 	private String middleName;
 
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
@@ -74,7 +88,6 @@ public class User extends BaseEntity {
 	public void setMiddleName(String middleName) {
 		this.middleName = middleName;
 	}
-
 
 	public List<Note> getNotes() {
 		if (notes == null) {

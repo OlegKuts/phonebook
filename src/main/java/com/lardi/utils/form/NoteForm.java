@@ -1,9 +1,12 @@
 package com.lardi.utils.form;
 
+import javax.validation.Valid;
+
 import com.lardi.domain.Address;
 import com.lardi.domain.Note;
 
 public class NoteForm {
+	@Valid
 	private Note note;
 	private Address address;
 

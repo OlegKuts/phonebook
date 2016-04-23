@@ -8,6 +8,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -15,19 +21,25 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Entity
 @Table(name = "notes")
 public class Note extends BaseEntity {
-
+	@Size(min = 4, message = "Name should be no less than {min} symbols")
 	private String name;
 	@Column(name = "last_name")
+	@Size(min = 4, message = "Last name should be no less than {min} symbols")
 	private String lastName;
 	@Column(name = "middle_name")
+	@Size(min = 4, message = "Middle name should be no less than {min} symbols")
 	private String middleName;
 	@Column(name = "cell_number")
+	@NotEmpty(message="Cell number cannot be empty")
+	@Pattern(regexp="\\+380\\(\\d{2}\\)\\d{7}", message="Enter valid cell number like +380(00)1234567")
 	private String cellNumber;
 	@Column(name = "phone_number")
+	@Pattern(regexp="\\d*\\(?\\d*\\)?\\d*", message="Phone number must consist of digits")
 	private String phoneNumber;
 	@OneToOne(mappedBy = "note", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JsonManagedReference
 	private Address address;
+	@Email
 	private String email;
 	@ManyToOne
 	@JoinColumn(name = "user_id")

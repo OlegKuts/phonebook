@@ -40,7 +40,7 @@ public class LoginController extends WebMvcConfigurerAdapter {
 
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
-			http.authorizeRequests().antMatchers("/register**").permitAll().antMatchers("/login**").permitAll().anyRequest().authenticated().and().formLogin().loginPage("/login")
+			http.authorizeRequests().antMatchers("/registration**").permitAll().antMatchers("/login**").permitAll().anyRequest().authenticated().and().formLogin().loginPage("/login")
 					.successHandler(authenticationSuccessHandler).failureUrl("/login?error").permitAll().and().logout()
 					.permitAll();
 			http.csrf().disable();

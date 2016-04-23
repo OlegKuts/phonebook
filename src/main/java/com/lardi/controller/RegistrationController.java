@@ -1,7 +1,10 @@
 package com.lardi.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,7 +13,7 @@ import com.lardi.domain.User;
 import com.lardi.service.UserService;
 
 @Controller
-public class RegisterController {
+public class RegistrationController {
 	@Autowired
 	private UserService userService;
 	
@@ -18,13 +21,16 @@ public class RegisterController {
 	public User noteForm() {
 		return new User();
 	}
-	@RequestMapping("/register")
+	@RequestMapping("/registration")
 	public String showRegister() {
-		return "register";
+		return "registration";
 	}
 
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String doRegister(@ModelAttribute("userForm") User user) {
+	@RequestMapping(value = "/registration", method = RequestMethod.POST)
+	public String doRegister(@ModelAttribute("userForm") @Valid User user, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			return "registration";
+		}
 		userService.registerUser(user);
 		return "redirect:/login?successful";
 	}
