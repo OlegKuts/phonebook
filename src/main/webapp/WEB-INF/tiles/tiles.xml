@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+	<definition name="common" template="/WEB-INF/layout/general.jsp">
+	</definition>
+
+	<definition name="login" extends="common">
+		<put-attribute name="body" value="/WEB-INF/jsp/login.jsp" />
+		<put-attribute name="current" value="login" />
+		<put-attribute name="title" value="Phone Book | Login" />
+	</definition>
+
+	<definition name="mainpage" extends="common">
+		<put-attribute name="body" value="/WEB-INF/jsp/mainpage.jsp" />
+		<put-attribute name="current" value="home" />
+		<put-attribute name="title" value="Phone Book | Notes" />
+	</definition>
+
+	<definition name="edit" extends="common">
+		<put-attribute name="body" value="/WEB-INF/jsp/edit.jsp" />
+		<put-attribute name="current" value="home" />
+		<put-attribute name="title" value="Phone Book | Edit" />
+	</definition>
+	
+	<definition name="new" extends="common">
+		<put-attribute name="body" value="/WEB-INF/jsp/new.jsp" />
+		<put-attribute name="current" value="home" />
+		<put-attribute name="title" value="Phone Book | New Note" />
+	</definition>
+	
+	<definition name="registration" extends="common">
+		<put-attribute name="body" value="/WEB-INF/jsp/registration.jsp" />
+		<put-attribute name="current" value="registration" />
+		<put-attribute name="title" value="Phone Book | Registration" />
+	</definition>
+</tiles-definitions>

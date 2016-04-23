@@ -1,6 +1,7 @@
-package com.lardi.controller;
+package com.lardi.configuration;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,12 +18,10 @@ import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-
-@Controller
-public class LoginController extends WebMvcConfigurerAdapter {
+@Configuration
+public class WebConfiguration extends WebMvcConfigurerAdapter {
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/login").setViewName("login");
@@ -40,7 +39,8 @@ public class LoginController extends WebMvcConfigurerAdapter {
 
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
-			http.authorizeRequests().antMatchers("/registration**").permitAll().antMatchers("/login**").permitAll().anyRequest().authenticated().and().formLogin().loginPage("/login")
+			http.authorizeRequests().antMatchers("/registration**").permitAll().antMatchers("/login**").permitAll()
+					.anyRequest().authenticated().and().formLogin().loginPage("/login")
 					.successHandler(authenticationSuccessHandler).failureUrl("/login?error").permitAll().and().logout()
 					.permitAll();
 			http.csrf().disable();
@@ -69,5 +69,4 @@ public class LoginController extends WebMvcConfigurerAdapter {
 
 		}
 	}
-
 }
