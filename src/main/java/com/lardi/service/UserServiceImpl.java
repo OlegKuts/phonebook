@@ -16,4 +16,11 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findByLogin(login);
 	}
 
+	@Override
+	public void registerUser(User user) {
+		user.setEnabled(true);
+		userRepository.save(user);
+		
+	}
+
 }

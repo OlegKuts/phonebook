@@ -60,6 +60,13 @@
 	border-top-right-radius: 0;
 }
 </style>
+	<c:if test="${param.successful ne null}">
+		<div class="alert alert-success">Registration successful</div>
+	</c:if>
+	<c:if test="${param.error ne null}">
+		<div class="alert alert-danger">Your login attempt was not
+			successful, try again</div>
+	</c:if>
 	<form class="form-signin" role="form"
 		action="<spring:url value="/login" />" method="POST">
 		<h2 class="form-signin-heading">Please sign in</h2>
