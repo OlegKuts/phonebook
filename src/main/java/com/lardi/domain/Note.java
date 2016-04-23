@@ -38,22 +38,6 @@ public class Note extends BaseEntity {
 
 	}
 
-	public Note(String name) {
-		super();
-		this.name = name;
-	}
-
-	public Note(String name, String lastName, String middleName, String cellNumber, String phoneNumber, Address address,
-			String email) {
-		this.name = name;
-		this.lastName = lastName;
-		this.middleName = middleName;
-		this.cellNumber = cellNumber;
-		this.phoneNumber = phoneNumber;
-		this.address = address;
-		this.email = email;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -116,6 +100,13 @@ public class Note extends BaseEntity {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	@Override
+	public String toString() {
+		return "Note [name=" + name + ", lastName=" + lastName + ", middleName=" + middleName + ", cellNumber="
+				+ cellNumber + ", phoneNumber=" + phoneNumber + ", address=" + address + ", email=" + email + ", user="
+				+ user + ", id=" + id + "]";
 	}
 
 }

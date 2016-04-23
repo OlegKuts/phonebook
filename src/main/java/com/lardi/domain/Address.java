@@ -46,4 +46,9 @@ public class Address extends BaseEntity {
 		this.street = street;
 	}
 
+	@Override
+	public String toString() {
+		return "Address [city=" + city + ", street=" + street + ", note=" + note + ", id=" + id + "]";
+	}
+
 }

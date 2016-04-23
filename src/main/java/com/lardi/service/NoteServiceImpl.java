@@ -22,12 +22,10 @@ public class NoteServiceImpl implements NoteService {
 	@Override
 	public void addNote(NoteForm noteForm, String login) {
 		User user = userRepository.findByLogin(login);
-		Note note = new Note();
-		note.setName(noteForm.getNote().getName());
-		Address address = new Address();
-		address.setCity(noteForm.getAddress().getCity());
-		address.setNote(note);
+		Note note = noteForm.getNote();
+		Address address = noteForm.getAddress();
 		note.setAddress(address);
+		address.setNote(note);
 		user.getNotes().add(note);
 		note.setUser(user);
 		userRepository.save(user);
@@ -45,11 +43,10 @@ public class NoteServiceImpl implements NoteService {
 
 	@Override
 	public void updateNote(NoteForm noteForm) {
-		Note note = noteRepository.findOne(noteForm.getNote().getId());
-		Address address = note.getAddress();
-		note.setName(noteForm.getNote().getName());
-		address.setCity(noteForm.getAddress().getCity());
+		Note note = noteForm.getNote();
+		Address address = noteForm.getAddress();
 		address.setNote(note);
+		note.setAddress(address);
 		noteRepository.save(note);
 	}
 
