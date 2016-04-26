@@ -41,6 +41,19 @@ public class User extends BaseEntity {
 	@JsonManagedReference
 	private List<Note> notes;
 
+	public User() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public User(String login, String password, String name, String lastName, String middleName) {
+		super();
+		this.login = login;
+		this.password = password;
+		this.name = name;
+		this.lastName = lastName;
+		this.middleName = middleName;
+	}
+
 	public String getLogin() {
 		return login;
 	}

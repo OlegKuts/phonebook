@@ -1,5 +1,7 @@
 package com.lardi.service;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,15 +14,15 @@ public class UserServiceImpl implements UserService {
 	private UserRepository userRepository;
 
 	@Override
-	public User findByLogin(String login) {
-		return userRepository.findByLogin(login);
+	public User findByLogin(Principal principal) {
+		return userRepository.findByLogin(principal.getName());
 	}
 
 	@Override
 	public void registerUser(User user) {
 		user.setEnabled(true);
 		userRepository.save(user);
-		
+
 	}
 
 }

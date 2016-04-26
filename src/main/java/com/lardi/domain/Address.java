@@ -18,6 +18,23 @@ public class Address extends BaseEntity {
 	@JsonBackReference
 	private Note note;
 
+	public Address() {
+		super();
+	}
+
+	public Address(String city, String street) {
+		super();
+		this.city = city;
+		this.street = street;
+	}
+
+	public Address(String city, String street, Note note) {
+		super();
+		this.city = city;
+		this.street = street;
+		this.note = note;
+	}
+
 	public Note getNote() {
 		return note;
 	}
@@ -25,10 +42,6 @@ public class Address extends BaseEntity {
 	public void setNote(Note note) {
 		this.note = note;
 	}
-
-	public Address() {
-	}
-
 
 	public String getCity() {
 		return city;

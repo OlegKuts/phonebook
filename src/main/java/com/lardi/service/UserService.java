@@ -1,11 +1,13 @@
 package com.lardi.service;
 
+import java.security.Principal;
+
 import com.lardi.domain.User;
 
 public interface UserService {
 
-	User findByLogin(String login);
-
 	void registerUser(User user);
+
+	User findByLogin(Principal principal);
 
 }

@@ -8,7 +8,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -30,17 +29,18 @@ public class Note extends BaseEntity {
 	@Size(min = 4, message = "Middle name should be no less than {min} symbols")
 	private String middleName;
 	@Column(name = "cell_number")
-	@NotEmpty(message="Cell number cannot be empty")
-	@Pattern(regexp="\\+380\\(\\d{2}\\)\\d{7}", message="Enter valid cell number like +380(00)1234567")
+	@NotEmpty(message = "Cell number cannot be empty")
+	@Pattern(regexp = "\\+380\\(\\d{2}\\)\\d{7}", message = "Enter valid cell number like +380(00)1234567")
 	private String cellNumber;
 	@Column(name = "phone_number")
-	@Pattern(regexp="\\d*\\(?\\d*\\)?\\d*", message="Phone number must consist of digits")
+	@Pattern(regexp = "\\d*\\(?\\d*\\)?\\d*", message = "Phone number must consist of digits")
 	private String phoneNumber;
+	@Email
+	private String email;
+
 	@OneToOne(mappedBy = "note", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JsonManagedReference
 	private Address address;
-	@Email
-	private String email;
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	@JsonBackReference
@@ -48,6 +48,19 @@ public class Note extends BaseEntity {
 
 	public Note() {
 
+	}
+
+	public Note(String name, String lastName, String middleName, String cellNumber, String phoneNumber, String email,
+			Address address, User user) {
+		super();
+		this.name = name;
+		this.lastName = lastName;
+		this.middleName = middleName;
+		this.cellNumber = cellNumber;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+		this.address = address;
+		this.user = user;
 	}
 
 	public String getName() {

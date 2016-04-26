@@ -21,6 +21,7 @@ public class NoteController {
 	@Autowired
 	private NoteService noteService;
 
+
 	@ModelAttribute("noteForm")
 	public NoteForm noteForm() {
 		return new NoteForm();
@@ -37,13 +38,13 @@ public class NoteController {
 		if (bindingResult.hasErrors()) {
 			return "new";
 		}
-		noteService.addNote(noteForm, principal.getName());
+		noteService.addNote(noteForm, principal);
 		return "redirect:/notes";
 	}
 
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public String editNote(@PathVariable("id") Long id, NoteForm noteForm, Principal principal) {
-		Note note = noteService.findById(id, principal.getName());
+		Note note = noteService.findById(id, principal);
 		noteForm.setNote(note);
 		noteForm.setAddress(note.getAddress());
 		return "edit";
@@ -60,7 +61,7 @@ public class NoteController {
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
 	public String deleteNote(@PathVariable("id") Long id, Principal principal) {
-		noteService.deleteNote(id, principal.getName());
+		noteService.deleteNote(id, principal);
 		return "redirect:/notes";
 	}
 }
